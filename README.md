@@ -9,6 +9,8 @@ Tilo Reneau-Cardoso
 
 Michele Tang
 
+Song Bai
+
 Richard Kim
 
 Madeline Seifert
