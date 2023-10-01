@@ -38,10 +38,9 @@ class WikiRacer(ABC):
     Subclasses should implement the `find_path` method.
     """
     @abstractmethod
-    def __init__(self, max_path_length):
-        if max_path_length < 1:
-            raise ValueError("Max path length must be at least 1")
-        self.max_path_length = max_path_length
+    def set_max_path(self, max_path_length: int):
+        pass
+
     @abstractmethod
     def find_path(self, start_page: str, dest_page: str) -> List[str]:
         """
