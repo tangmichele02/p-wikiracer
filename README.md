@@ -9,6 +9,8 @@ Tilo Reneau-Cardoso
 
 Michele Tang
 
+Aldo Ruiz Parra
+
 Song Bai
 
 Richard Kim
