@@ -7,3 +7,5 @@ https://flask.palletsprojects.com/en/2.3.x/quickstart/
 Tilo Reneau-Cardoso
 
 Michele Tang
+
+Richard Kim
