@@ -9,6 +9,8 @@ Tilo Reneau-Cardoso
 
 Michele Tang
 
+Emily Zhu
+
 Aldo Ruiz Parra
 
 Song Bai
