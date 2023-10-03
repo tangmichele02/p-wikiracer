@@ -29,14 +29,14 @@ def get_random_page():
 
     return random_page_title
 
-def isValidPath(path: List[str]):
+def is_valid_path(path: List[str]):
     """
     Checks if each page in path is linked from
     the previous page.
     """
     pass
 
-def getFirstLinkedPage(page):
+def get_first_linked_page(page):
     """
     Returns the first linked page on `page`.
 
