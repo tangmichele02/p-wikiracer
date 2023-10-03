@@ -15,7 +15,7 @@ class RandomRacer(WikiRacer):
     def __init__(self):
         self.max_path_length = 50
 
-    def set_max_path(self, max_path_length: int):
+    def set_max_path_length(self, max_path_length: int):
         if max_path_length < 1:
             raise ValueError("Max path length must be at least 1")
         self.max_path_length = max_path_length
