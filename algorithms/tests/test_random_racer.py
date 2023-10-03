@@ -1,6 +1,8 @@
 from algorithms.random_racer import RandomRacer
 from algorithms.wikiracer import MaxPathLengthExceeded
 from pytest import raises
+
+
 def test_random_racer():
     rr = RandomRacer()
     rr.set_max_path_length(10)
