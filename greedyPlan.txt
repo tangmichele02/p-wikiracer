@@ -2,11 +2,13 @@
     - All the texts, thats what we use sentence transformers format
     - Are we comparing based on titles or entire wikipedia content?
     - Do we want to include the "hidden links" or not?
+    - Done- we get all the titles
 
 2) We use the cosine similarities to compare to compare how similar two links
     - Currently, we already have a way to get all the links
     - This is using Semantic Search I believe, and we input it as a parameter for one function
     - Six links of hypthesis? maybe the max
+    - Done
 
 3) We are using weights of the cosine,
     - Make sure it does not do a loop - revisit pages - we can do this with a hashset

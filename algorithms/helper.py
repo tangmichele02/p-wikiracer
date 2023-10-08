@@ -72,17 +72,20 @@ def getLinkedPages(page):
 
     return res
 
-# def getCosSim(links, target_page):
-#     # target_embed = model.encode(getLinkedPages(target_page))
-#     sim_list = []
-#     encoded_target = model.encode(target_page)
+def getCosSim(links, target_page):
+    # target_embed = model.encode(getLinkedPages(target_page))
+    highest_sim = ("", -1)
+    encoded_target = model.encode(target_page)
 
-#     for ind in range(len(links)):
-#         encoded_link = model.encode(links[ind])
-#         sim = util.cos_sim(encoded_link, encoded_target)
+    for ind in range(len(links)):
+        encoded_link = model.encode(links[ind])
+        sim = util.cos_sim(encoded_link, encoded_target)
+        sim_val = sim[0][0].item()
+        if sim_val > highest_sim[1]:
+            highest_sim = (links[ind], sim_val)
+    return highest_sim[0]
+    # return type(sim_list[1][1][0][0].item())
 
-#         sim_list.append((links[ind], sim))
-#     return sim_list
 
-
-print(getLinkedPages("Pomona College"))
+links = getLinkedPages("Pomona College")
+print(getCosSim(links, "Pitzer College"))
