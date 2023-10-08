@@ -6,7 +6,7 @@ from sentence_transformers import SentenceTransformer, util
 
 
 class Greedy(WikiRacer):
-    def __init__(self, max_path_length, doc_sim_func):
+    def __init__(self):
         """
         Parameters
         ----------
@@ -15,14 +15,14 @@ class Greedy(WikiRacer):
             Takes two wikipedia page titles and returns
             some measure of their similarity.
         """
-        super().__init__(max_path_length)
-        self.doc_sim = doc_sim_func
-        self.max_path_length = max_path_length #18
+        #super().__init__(max_path_length)
+        #self.doc_sim = doc_sim_func
+        self.max_path_length = 18 
         self.model = SentenceTransformer('paraphrase-MiniLM-L6-v2')
 
 
 
-    def set_max_path(self, max_path_length: int):
+    def set_max_path(self, max_path_length):
         if max_path_length < 1:
             raise ValueError("Max path length must be at least 1")
         self.max_path_length = max_path_length
@@ -37,7 +37,17 @@ class Greedy(WikiRacer):
         Should raise `FailedPath` exception if it can't find a path for
         a reason other than an api call failure.
         """
-        pass
+        visited = set()
+        count = 1 #or 0
+        # Need to run a while loop that while we have not reached max path length
+        # Or the destination has to been found
+        while True:
+            
+            # get Linked Pages - we will only once per title
+            # get_cos_sim - Pomona -> Claremont Colleges -> Pomonaona 
+            # Call that until we get a unqiue vale
+            #
+        
 
     def get_linked_pages(self, page):
         """
@@ -63,7 +73,7 @@ class Greedy(WikiRacer):
 
         return res
 
-def get_cos_sim(self, links, target_page):
+def get_most_similar(self, links, target_page, visited):
     # target_embed = model.encode(getLinkedPages(target_page))
     highest_sim = ("", -1)
     encoded_target = self.model.encode(target_page)
@@ -72,7 +82,6 @@ def get_cos_sim(self, links, target_page):
         encoded_link = self.model.encode(links[ind])
         sim = util.cos_sim(encoded_link, encoded_target)
         sim_val = sim[0][0].item()
-        if sim_val > highest_sim[1]:
+        if sim_val > highest_sim[1] and sim_val not in visited:
             highest_sim = (links[ind], sim_val)
     return highest_sim[0]
-    # return type(sim_list[1][1][0][0].item())
