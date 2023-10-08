@@ -1,4 +1,8 @@
 from algorithms.wikiracer import WikiRacer
+#import algorithms.helper #import get_linked_pages, get_cos_sim
+import requests
+from typing import List
+from sentence_transformers import SentenceTransformer, util
 
 
 class Greedy(WikiRacer):
@@ -14,6 +18,8 @@ class Greedy(WikiRacer):
         super().__init__(max_path_length)
         self.doc_sim = doc_sim_func
         self.max_path_length = max_path_length #18
+        self.model = SentenceTransformer('paraphrase-MiniLM-L6-v2')
+
 
 
     def set_max_path(self, max_path_length: int):
@@ -32,3 +38,41 @@ class Greedy(WikiRacer):
         a reason other than an api call failure.
         """
         pass
+
+    def get_linked_pages(self, page):
+        """
+        returns the title of all the linked pages of a wikipedia page
+        """
+        api_url = "https://en.wikipedia.org/w/api.php"
+
+        params = {
+        'action': 'parse',
+        'page': page,
+        'format': 'json'
+        }
+
+        response = requests.get(api_url, params=params)
+        data = response.json()
+        # print(type(data['parse']['links']))
+
+        res = []
+        #res.append(page)
+
+        for row in data['parse']['links']:
+            res.append(row['*'])
+
+        return res
+
+def get_cos_sim(self, links, target_page):
+    # target_embed = model.encode(getLinkedPages(target_page))
+    highest_sim = ("", -1)
+    encoded_target = self.model.encode(target_page)
+
+    for ind in range(len(links)):
+        encoded_link = self.model.encode(links[ind])
+        sim = util.cos_sim(encoded_link, encoded_target)
+        sim_val = sim[0][0].item()
+        if sim_val > highest_sim[1]:
+            highest_sim = (links[ind], sim_val)
+    return highest_sim[0]
+    # return type(sim_list[1][1][0][0].item())
