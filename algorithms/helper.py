@@ -48,29 +48,29 @@ def get_first_linked_page(page):
     See https://en.wikipedia.org/wiki/Wikipedia:Getting_to_Philosophy.
     """
 
-# def get_linked_pages(page):
-#     """
-#     returns the title of all the linked pages of a wikipedia page
-#     """
-#     api_url = "https://en.wikipedia.org/w/api.php"
+def get_linked_pages(page):
+    """
+    returns the title of all the linked pages of a wikipedia page
+    """
+    api_url = "https://en.wikipedia.org/w/api.php"
 
-#     params = {
-#     'action': 'parse',
-#     'page': page,
-#     'format': 'json'
-#     }
+    params = {
+    'action': 'parse',
+    'page': page,
+    'format': 'json'
+    }
 
-#     response = requests.get(api_url, params=params)
-#     data = response.json()
-#     # print(type(data['parse']['links']))
+    response = requests.get(api_url, params=params)
+    data = response.json()
+    # print(type(data['parse']['links']))
 
-#     res = []
-#     #res.append(page)
+    res = []
+    #res.append(page)
 
-#     for row in data['parse']['links']:
-#         res.append(row['*'])
+    for row in data['parse']['links']:
+        res.append(row['*'])
 
-#     return res
+    return res
 
 # def get_cos_sim(links, target_page):
 #     # target_embed = model.encode(getLinkedPages(target_page))
@@ -87,5 +87,5 @@ def get_first_linked_page(page):
 #     # return type(sim_list[1][1][0][0].item())
 
 
-# links = get_linked_pages("Pomona College")
+print(get_linked_pages("Pomona College"))
 # print(get_cos_sim(links, "Pitzer College"))

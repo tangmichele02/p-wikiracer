@@ -38,18 +38,25 @@ class Greedy(WikiRacer):
         a reason other than an api call failure.
         """
         visited = set()
-        count = 1 #or 0
+        count = 0 #or 1
         # Need to run a while loop that while we have not reached max path length
         # Or the destination has to been found
-        while True:
+        compare_value = start_page
+        while count < self.max_path_length:
             
             # get Linked Pages - we will only once per title
+            links = self.get_linked_pages(compare_value, visited)
+            get_most_similar_value = self.get_most_similar(links, dest_page)
+            visited.add(get_most_similar_value)
+            if get_most_similar_value == self.dest_page:
+                return get_most_similar_value
+            
             # get_cos_sim - Pomona -> Claremont Colleges -> Pomonaona 
             # Call that until we get a unqiue vale
-            #
+        return None
         
 
-    def get_linked_pages(self, page):
+    def get_linked_pages(self, page, visited):
         """
         returns the title of all the linked pages of a wikipedia page
         """
@@ -69,19 +76,21 @@ class Greedy(WikiRacer):
         #res.append(page)
 
         for row in data['parse']['links']:
-            res.append(row['*'])
+            cur = row['*']
+            if cur not in visited:
+                res.append(row['*'])
 
         return res
 
-def get_most_similar(self, links, target_page, visited):
-    # target_embed = model.encode(getLinkedPages(target_page))
-    highest_sim = ("", -1)
-    encoded_target = self.model.encode(target_page)
+    def get_most_similar(self, links, target_page):
+        # target_embed = model.encode(getLinkedPages(target_page))
+        highest_sim = ("", -1)
+        encoded_target = self.model.encode(target_page)
 
-    for ind in range(len(links)):
-        encoded_link = self.model.encode(links[ind])
-        sim = util.cos_sim(encoded_link, encoded_target)
-        sim_val = sim[0][0].item()
-        if sim_val > highest_sim[1] and sim_val not in visited:
-            highest_sim = (links[ind], sim_val)
-    return highest_sim[0]
+        for ind in range(len(links)):
+            encoded_link = self.model.encode(links[ind])
+            sim = util.cos_sim(encoded_link, encoded_target)
+            sim_val = sim[0][0].item()
+            if sim_val > highest_sim[1]:  #and sim value not in visited?
+                highest_sim = (links[ind], sim_val)
+        return highest_sim[0]
