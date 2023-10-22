@@ -1,9 +1,14 @@
-# from algorithms.wikiracer import WikiRacer
-# import algorithms.helper #import get_linked_pages, get_cos_sim
+#import algorithms
+from wikiracer import WikiRacer
+import helper #import get_linked_pages, get_cos_sim
+
 import requests
 from typing import List
 from sentence_transformers import SentenceTransformer, util
 
+import os
+print("blah")
+print(os.getcwd())
 
 class Greedy():
     def __init__(self):
