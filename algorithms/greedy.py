@@ -1,11 +1,11 @@
-from algorithms.wikiracer import WikiRacer
-#import algorithms.helper #import get_linked_pages, get_cos_sim
+# from algorithms.wikiracer import WikiRacer
+# import algorithms.helper #import get_linked_pages, get_cos_sim
 import requests
 from typing import List
 from sentence_transformers import SentenceTransformer, util
 
 
-class Greedy(WikiRacer):
+class Greedy():
     def __init__(self):
         """
         Parameters
@@ -28,7 +28,7 @@ class Greedy(WikiRacer):
         self.max_path_length = max_path_length
 
 
-    def find_path(self, start_page: str, dest_page: str) -> List[str]:
+    def find_path(self, start_page: str, dest_page: str):
         """
         Returns a list of Wikipedia page titles representing the path.
         The `start_page` should be included as the first page of the path
@@ -37,26 +37,28 @@ class Greedy(WikiRacer):
         Should raise `FailedPath` exception if it can't find a path for
         a reason other than an api call failure.
         """
-        visited = set()
+        visited = [start_page]
         count = 0 #or 1
         # Need to run a while loop that while we have not reached max path length
         # Or the destination has to been found
         compare_value = start_page
         while count < self.max_path_length:
-            
+            print(count)
+            print(visited)
             # get Linked Pages - we will only once per title
-            links = self.get_linked_pages(compare_value, visited)
-            get_most_similar_value = self.get_most_similar(links, dest_page)
-            visited.add(get_most_similar_value)
-            if get_most_similar_value == self.dest_page:
-                return get_most_similar_value
-            
+            links = self.get_linked_pages(compare_value)
+            get_most_similar_value = self.get_most_similar(links, dest_page, visited)
+            visited.append(get_most_similar_value)
+            if get_most_similar_value == dest_page:
+                return visited
+            compare_value = get_most_similar_value
+            count += 1
             # get_cos_sim - Pomona -> Claremont Colleges -> Pomonaona 
             # Call that until we get a unqiue vale
-        return None
+        raise Exception('Failed Path')
         
 
-    def get_linked_pages(self, page, visited):
+    def get_linked_pages(self, page):
         """
         returns the title of all the linked pages of a wikipedia page
         """
@@ -76,13 +78,11 @@ class Greedy(WikiRacer):
         #res.append(page)
 
         for row in data['parse']['links']:
-            cur = row['*']
-            if cur not in visited:
-                res.append(row['*'])
+            res.append(row['*'])
 
         return res
 
-    def get_most_similar(self, links, target_page):
+    def get_most_similar(self, links, target_page, visited):
         # target_embed = model.encode(getLinkedPages(target_page))
         highest_sim = ("", -1)
         encoded_target = self.model.encode(target_page)
@@ -91,6 +91,17 @@ class Greedy(WikiRacer):
             encoded_link = self.model.encode(links[ind])
             sim = util.cos_sim(encoded_link, encoded_target)
             sim_val = sim[0][0].item()
-            if sim_val > highest_sim[1]:  #and sim value not in visited?
+            if (sim_val > highest_sim[1]) and (links[ind] not in visited):  #and sim value not in visited?
                 highest_sim = (links[ind], sim_val)
+        
         return highest_sim[0]
+
+# def main():
+#     findPath("Pomona College", "Pitzer College")
+
+# if __name__ == "__main__":
+#     main()
+tester_1 = Greedy()
+print(tester_1.find_path("Pomona College", "Gavin Newsom"))
+# Issue with Pomona College to Albert Einstein - parse line 80
+

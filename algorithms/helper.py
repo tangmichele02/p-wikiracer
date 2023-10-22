@@ -72,20 +72,19 @@ def get_linked_pages(page):
 
     return res
 
-# def get_cos_sim(links, target_page):
-#     # target_embed = model.encode(getLinkedPages(target_page))
-#     highest_sim = ("", -1)
-#     encoded_target = model.encode(target_page)
+def get_cos_sim(links, target_page):
+    # target_embed = model.encode(getLinkedPages(target_page))
+    highest_sim = ("", -1)
+    encoded_target = model.encode(target_page)
 
-#     for ind in range(len(links)):
-#         encoded_link = model.encode(links[ind])
-#         sim = util.cos_sim(encoded_link, encoded_target)
-#         sim_val = sim[0][0].item()
-#         if sim_val > highest_sim[1]:
-#             highest_sim = (links[ind], sim_val)
-#     return highest_sim[0]
-#     # return type(sim_list[1][1][0][0].item())
+    for ind in range(len(links)):
+        encoded_link = model.encode(links[ind])
+        sim = util.cos_sim(encoded_link, encoded_target)
+        sim_val = sim[0][0].item()
+        if sim_val > highest_sim[1]:
+            highest_sim = (links[ind], sim_val)
+    return highest_sim[0]
+    # return type(sim_list[1][1][0][0].item())
 
-
-print(get_linked_pages("Pomona College"))
-# print(get_cos_sim(links, "Pitzer College"))
+links = get_linked_pages("Colorado River (Texas)")
+print(get_cos_sim(links, "Colorado River"))
