@@ -86,3 +86,36 @@ input {
 	position: relative;
 	font-family:'Press Start 2P';
 }
+
+.dot {
+	height: 1px;
+	width: 1px;
+	background-color: C3DBF5;
+	border-radius: 50%;
+	display: inline-block;
+	transform: translateX(-100%);
+	animation-name: chug;
+	animation-duration: 4s;
+	animation-iteration-count: infinite;
+}
+
+img {
+	width: 50%;
+	height: auto;
+}
+
+@keyframes chug {
+	0% {
+		transform: translateX(-100%);
+	}
+	33% {
+		transform: translateX(50vw);
+	}
+	66% {
+		transform: translateX(50vw);
+	}
+	100% {
+		transform: translateX(100vw);
+	}
+}
+
