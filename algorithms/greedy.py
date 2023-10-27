@@ -42,31 +42,48 @@ class Greedy():
         Should raise `FailedPath` exception if it can't find a path for
         a reason other than an api call failure.
         """
+ 
+        try:
+            self.access_data(start_page)
+        except:
+            return "Start page does not exist"
+        
+        try:
+            self.access_data(dest_page)
+        except:
+            return "Destination page does not exist "
+        
         visited = [start_page]
         count = 0 #or 1
         # Need to run a while loop that while we have not reached max path length
         # Or the destination has to been found
-        compare_value = start_page
+        current_page = start_page
+
         while count < self.max_path_length:
             print(count)
             print(visited)
             # get Linked Pages - we will only once per title
-            links = self.get_linked_pages(compare_value)
-            get_most_similar_value = self.get_most_similar(links, dest_page, visited)
-            visited.append(get_most_similar_value)
-            if get_most_similar_value == dest_page:
+            links = self.get_linked_pages(current_page, visited)
+            most_sim_page = self.get_most_similar(links, dest_page)
+            visited.append(most_sim_page)
+            if most_sim_page == dest_page:
                 return visited
-            compare_value = get_most_similar_value
+            current_page = most_sim_page
             count += 1
             # get_cos_sim - Pomona -> Claremont Colleges -> Pomonaona 
             # Call that until we get a unqiue vale
         raise Exception('Failed Path')
+
+        
         
 
-    def get_linked_pages(self, page):
+        
+
+    def access_data(self, page):
         """
-        returns the title of all the linked pages of a wikipedia page
+        returns a list of links for a wikipedia page 
         """
+
         api_url = "https://en.wikipedia.org/w/api.php"
 
         params = {
@@ -77,17 +94,49 @@ class Greedy():
 
         response = requests.get(api_url, params=params)
         data = response.json()
+
+        return data
+        
+
+
+
+    def get_linked_pages(self, page, visited):
+        """
+        returns the title of all the linked pages of a wikipedia page
+        """
+
+        try:
+            data = self.access_data(page)
+        except:
+            return "Page does not exist"
+        # try: 
+        #     api_url = "https://en.wikipedia.org/w/api.php"
+
+        #     params = {
+        #     'action': 'parse',
+        #     'page': page,
+        #     'format': 'json'
+        #     }
+
+        #     response = requests.get(api_url, params=params)
+        #     data = response.json()
+        # except:
+        #     print("Page does not exist")
         # print(type(data['parse']['links']))
 
-        res = []
+        linked_pages = []
         #res.append(page)
+        
 
-        for row in data['parse']['links']:
-            res.append(row['*'])
+        for row in data['parse']['links']: # possibility of of adding list comprehensio
+            # title of a linked page
+            cur_page = row['*']
+            if cur_page not in visited:
+                linked_pages.append(cur_page)
 
-        return res
+        return linked_pages
 
-    def get_most_similar(self, links, target_page, visited):
+    def get_most_similar(self, links, target_page):
         # target_embed = model.encode(getLinkedPages(target_page))
         highest_sim = ("", -1)
         encoded_target = self.model.encode(target_page)
@@ -96,7 +145,7 @@ class Greedy():
             encoded_link = self.model.encode(links[ind])
             sim = util.cos_sim(encoded_link, encoded_target)
             sim_val = sim[0][0].item()
-            if (sim_val > highest_sim[1]) and (links[ind] not in visited):  #and sim value not in visited?
+            if (sim_val > highest_sim[1]):  #and sim value not in visited?
                 highest_sim = (links[ind], sim_val)
         
         return highest_sim[0]
@@ -107,6 +156,6 @@ class Greedy():
 # if __name__ == "__main__":
 #     main()
 tester_1 = Greedy()
-print(tester_1.find_path("Pomona College", "Gavin Newsom"))
+print(tester_1.find_path("Tilo RC", "Inland Empire"))
 # Issue with Pomona College to Albert Einstein - parse line 80
 

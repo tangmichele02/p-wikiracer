@@ -22,6 +22,6 @@
     - Step 3: Create an iterative process for going over all subproblems and creating an optimum solution.
 
 4) To-do
-    - Change names for better names
-    - update visited in getlinkedlists
+    - Change names for better names [DONE]
+    - update visited in getlinkedlists [DONE]
         - would decrease the number of cos sim we'd have to run
