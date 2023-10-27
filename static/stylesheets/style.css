@@ -99,11 +99,6 @@ input {
 	animation-iteration-count: infinite;
 }
 
-img {
-	width: 50%;
-	height: auto;
-}
-
 @keyframes chug {
 	0% {
 		transform: translateX(-100%);
