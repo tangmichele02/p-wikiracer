@@ -126,9 +126,9 @@ class Greedy():
 
 # if __name__ == "__main__":
 #     main()
-tester_1 = Greedy()
-print(tester_1.find_path("Pomona College", "Inland Empire"))
-print("done")
+# tester_1 = Greedy()
+# print(tester_1.find_path("Pomona College", "Inland Empire"))
+# print("done")
 
 # wiki_access = wikipediaapi.Wikipedia('Aldo & Richard', 'en')
 # wiki_start = wiki_access.page("Pomona College") 

@@ -1,6 +1,6 @@
 from greedy import Greedy
 from helper import PageRequestError
-from algorithms.wikiracer import MaxPathLengthExceeded
+from wikiracer import MaxPathLengthExceeded
 from pytest import raises
 
 
@@ -19,10 +19,13 @@ def test_random_racer():
     # Max path length must be at least 1
     raises(ValueError, lambda: gr.set_max_path_length(0))
 
-    # Start Page does not exist 
+    # # Start Page does not exist 
     raises(PageRequestError, lambda: gr.find_path("Tilo RC", "Pomona College"))
 
-    # Destination Page does not exist
+    # # Destination Page does not exist
     raises(PageRequestError, lambda: gr.find_path("Pomona College", "Tilo RC"))
 
-    # an example that works is KIPP texas public schools and colorado river?
+    # an example that works is KIPP texas public schools and colorado river?    
+    tester_1 = Greedy()
+    print(tester_1.find_path("KIPP Texas Public Schools", "Colorado River"))
+    print("done")
