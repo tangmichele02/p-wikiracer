@@ -5,6 +5,7 @@ moved to other files.
 """
 
 import requests
+import wikipediaapi
 from typing import List
 
 from sentence_transformers import SentenceTransformer, util
@@ -52,25 +53,29 @@ def get_linked_pages(page):
     """
     returns the title of all the linked pages of a wikipedia page
     """
-    api_url = "https://en.wikipedia.org/w/api.php"
+    links = page.links
+    linked_pages = []
+    for title in sorted(links.keys()):
+        linked_pages.append(title)
+    # api_url = "https://en.wikipedia.org/w/api.php"
 
-    params = {
-    'action': 'parse',
-    'page': page,
-    'format': 'json'
-    }
+    # params = {
+    # 'action': 'parse',
+    # 'page': page,
+    # 'format': 'json'
+    # }
 
-    response = requests.get(api_url, params=params)
-    data = response.json()
-    # print(type(data['parse']['links']))
+    # response = requests.get(api_url, params=params)
+    # data = response.json()
+    # # print(type(data['parse']['links']))
 
-    res = []
-    #res.append(page)
+    # res = []
+    # #res.append(page)
 
-    for row in data['parse']['links']:
-        res.append(row['*'])
+    # for row in data['parse']['links']:
+    #     res.append(row['*'])
 
-    return res
+    return linked_pages
 
 def get_cos_sim(links, target_page):
     # target_embed = model.encode(getLinkedPages(target_page))
@@ -86,5 +91,7 @@ def get_cos_sim(links, target_page):
     return highest_sim[0]
     # return type(sim_list[1][1][0][0].item())
 
-links = get_linked_pages("Colorado River (Texas)")
-print(get_cos_sim(links, "Colorado River"))
+# wiki_wiki = wikipediaapi.Wikipedia('Aldo & Rich', 'en')
+# page_py = wiki_wiki.page('Colorado River (Texas)')
+# print (get_linked_pages(page_py))
+# print(get_cos_sim(links, "Colorado River"))

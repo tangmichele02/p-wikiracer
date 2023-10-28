@@ -1,14 +1,15 @@
 #import algorithms
-from wikiracer import WikiRacer
-import helper #import get_linked_pages, get_cos_sim
+from wikiracer import MaxPathLengthExceeded
+from helper import PageRequestError #import get_linked_pages, get_cos_sim
 
 import requests
+import wikipediaapi
 from typing import List
 from sentence_transformers import SentenceTransformer, util
 
 import os
-print("blah")
-print(os.getcwd())
+# print("blah")
+# print(os.getcwd())
 
 class Greedy():
     def __init__(self):
@@ -42,41 +43,34 @@ class Greedy():
         Should raise `FailedPath` exception if it can't find a path for
         a reason other than an api call failure.
         """
- 
-        try:
-            self.access_data(start_page)
-        except:
-            return "Start page does not exist"
-        
-        try:
-            self.access_data(dest_page)
-        except:
-            return "Destination page does not exist "
-        
-        visited = [start_page]
-        count = 0 #or 1
-        # Need to run a while loop that while we have not reached max path length
-        # Or the destination has to been found
-        current_page = start_page
+        wiki_access = wikipediaapi.Wikipedia('Aldo & Richard', 'en')
+        wiki_start = wiki_access.page(start_page) 
+        wiki_dest = wiki_access.page(dest_page)
 
-        while count < self.max_path_length:
-            print(count)
-            print(visited)
-            # get Linked Pages - we will only once per title
-            links = self.get_linked_pages(current_page, visited)
-            most_sim_page = self.get_most_similar(links, dest_page)
-            visited.append(most_sim_page)
-            if most_sim_page == dest_page:
-                return visited
-            current_page = most_sim_page
-            count += 1
-            # get_cos_sim - Pomona -> Claremont Colleges -> Pomonaona 
-            # Call that until we get a unqiue vale
-        raise Exception('Failed Path')
+        if (wiki_start.exists() and wiki_dest.exists()):
+            visited = [start_page]
+            count = 0 #or 1
+            current_wiki = wiki_start
 
-        
-        
+            while count < self.max_path_length:
+                print(count)
+                print(visited)
+                # get Linked Pages - we will only once per title
+                links = self.get_linked_pages(current_wiki, visited)
+                # print(links)
 
+
+                most_sim_page = self.get_most_similar(links, dest_page)
+                visited.append(most_sim_page)
+                if most_sim_page == dest_page:
+                    return visited
+                current_wiki = wiki_access.page(most_sim_page)
+                count += 1
+            raise MaxPathLengthExceeded(f"Path of length less than or equal to {self.max_path_length} could not be found.")
+        elif (not wiki_start.exists()):
+            raise PageRequestError("Start page does not exist as a wikipedia title")
+        else:
+            raise PageRequestError("Destination page does not exist as a wikipedia title")
         
 
     def access_data(self, page):
@@ -96,45 +90,22 @@ class Greedy():
         data = response.json()
 
         return data
-        
-
 
 
     def get_linked_pages(self, page, visited):
         """
         returns the title of all the linked pages of a wikipedia page
         """
-
-        try:
-            data = self.access_data(page)
-        except:
-            return "Page does not exist"
-        # try: 
-        #     api_url = "https://en.wikipedia.org/w/api.php"
-
-        #     params = {
-        #     'action': 'parse',
-        #     'page': page,
-        #     'format': 'json'
-        #     }
-
-        #     response = requests.get(api_url, params=params)
-        #     data = response.json()
-        # except:
-        #     print("Page does not exist")
-        # print(type(data['parse']['links']))
-
+        #gets the raw pages
+        links = page.links
         linked_pages = []
-        #res.append(page)
-        
-
-        for row in data['parse']['links']: # possibility of of adding list comprehensio
-            # title of a linked page
-            cur_page = row['*']
-            if cur_page not in visited:
-                linked_pages.append(cur_page)
+        for title in sorted(links.keys()):
+            if title not in visited:
+                # print(type(title))
+                linked_pages.append(title)
 
         return linked_pages
+        
 
     def get_most_similar(self, links, target_page):
         # target_embed = model.encode(getLinkedPages(target_page))
@@ -156,6 +127,12 @@ class Greedy():
 # if __name__ == "__main__":
 #     main()
 tester_1 = Greedy()
-print(tester_1.find_path("Tilo RC", "Inland Empire"))
+print(tester_1.find_path("Pomona College", "Inland Empire"))
+print("done")
+
+# wiki_access = wikipediaapi.Wikipedia('Aldo & Richard', 'en')
+# wiki_start = wiki_access.page("Pomona College") 
+# print(tester_1.get_linked_pages(wiki_start, []))
+
 # Issue with Pomona College to Albert Einstein - parse line 80
 
