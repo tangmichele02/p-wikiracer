@@ -13,8 +13,26 @@ from sentence_transformers import SentenceTransformer, util
 # Download model
 model = SentenceTransformer('paraphrase-MiniLM-L6-v2')
 
+class FailedPath(Exception):
+    """
+    Raised when a WikiRacer fails to find a path between the
+    destination and start page.
+
+    Note that if a WikiRacer fails to find a path because of
+    an issue with an api call, that should *not* be considered
+    a FailedPath exception.
+    """
+    pass
+
 class PageRequestError(Exception):
     pass
+
+class PathDeadend(FailedPath):
+    """
+    Raised when there are no pages left to visit.
+    """
+    pass
+
 
 def get_random_page():
     api_url = "https://en.wikipedia.org/w/api.php"

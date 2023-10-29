@@ -1,6 +1,6 @@
 #import algorithms
 from wikiracer import MaxPathLengthExceeded
-from helper import PageRequestError #import get_linked_pages, get_cos_sim
+from helper import PageRequestError, PathDeadend, FailedPath #import get_linked_pages, get_cos_sim
 
 import requests
 import wikipediaapi
@@ -55,10 +55,13 @@ class Greedy():
             while count < self.max_path_length:
                 print(count)
                 print(visited)
+
+                if not current_wiki.exists:
+                    #raise path end
+                    raise PathDeadend
                 # get Linked Pages - we will only once per title
                 links = self.get_linked_pages(current_wiki, visited)
                 # print(links)
-
 
                 most_sim_page = self.get_most_similar(links, dest_page)
                 visited.append(most_sim_page)
