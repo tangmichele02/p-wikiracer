@@ -99,8 +99,8 @@ class Greedy():
         #gets the raw pages
         links = page.links
         linked_pages = []
-        for title in sorted(links.keys()):
-            if title not in visited:
+        for title in links.keys():
+            if title not in visited: 
                 # print(type(title))
                 linked_pages.append(title)
 
@@ -109,30 +109,36 @@ class Greedy():
 
     def get_most_similar(self, links, target_page):
         # target_embed = model.encode(getLinkedPages(target_page))
-        highest_sim = ("", -1)
+        # highest_sim = ("", -1)
         encoded_target = self.model.encode(target_page)
 
-        for ind in range(len(links)):
-            encoded_link = self.model.encode(links[ind])
-            sim = util.cos_sim(encoded_link, encoded_target)
-            sim_val = sim[0][0].item()
-            if (sim_val > highest_sim[1]):  #and sim value not in visited?
-                highest_sim = (links[ind], sim_val)
+        sorted_links = sorted(links,key = lambda title: util.cos_sim(self.model.encode(title), encoded_target)[0][0].item(), reverse=True)
+
+        return sorted_links[0]
+        # for ind in range(len(links)):
+        #     encoded_link = self.model.encode(links[ind])
+        #     sim = util.cos_sim(encoded_link, encoded_target)
+        #     sim_val = sim[0][0].item()
+        #     if (sim_val > highest_sim[1]):  #and sim value not in visited?
+        #         highest_sim = (links[ind], sim_val)
         
-        return highest_sim[0]
+        # return highest_sim[0]
 
 # def main():
 #     findPath("Pomona College", "Pitzer College")
 
-# if __name__ == "__main__":
+if __name__ == "__main__":
 #     main()
-# tester_1 = Greedy()
-# print(tester_1.find_path("Pomona College", "Inland Empire"))
-# print("done")
+    tester_1 = Greedy()
+    # print(tester_1.find_path("Pomona College", "Inland Empire"))
+    # print("done")
 
-# wiki_access = wikipediaapi.Wikipedia('Aldo & Richard', 'en')
-# wiki_start = wiki_access.page("Pomona College") 
-# print(tester_1.get_linked_pages(wiki_start, []))
+    wiki_access = wikipediaapi.Wikipedia('Aldo & Richard', 'en')
+    # wiki_start = wiki_access.page("Pomona College") 
+    wiki_start = wiki_access.page("Moses Hahl")
+    print(wiki_start.exists())
+    # print(tester_1.find_path("Pomona College", "Albert Einstein"))
 
-# Issue with Pomona College to Albert Einstein - parse line 80
+    # Issue with Pomona College to Albert Einstein - parse line 80
+
 

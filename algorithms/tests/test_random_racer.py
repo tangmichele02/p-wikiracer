@@ -14,3 +14,5 @@ def test_random_racer():
 
     # Max path length must be at least 1
     raises(ValueError, lambda: rr.set_max_path_length(0))
+
+    # If there is a dead link, PathDeadEnd
