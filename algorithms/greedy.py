@@ -1,11 +1,7 @@
-#import algorithms
 from wikiracer import MaxPathLengthExceeded
-from helper import PageRequestError, PathDeadend, FailedPath #import get_linked_pages, get_cos_sim
-
-import requests
-import wikipediaapi
-from typing import List
+from helper import PageRequestError, PathDeadend
 from sentence_transformers import SentenceTransformer, util
+import wikipediaapi
 
 
 class Greedy():
@@ -25,6 +21,9 @@ class Greedy():
 
 
     def set_max_path(self, max_path_length):
+        """
+        Sets the max path length
+        """
         if max_path_length < 1:
             raise ValueError("Max path length must be at least 1")
         self.max_path_length = max_path_length
@@ -50,10 +49,6 @@ class Greedy():
             current_wiki = wiki_start # tracks current wiki page
 
             while count < self.max_path_length:
-                # comment out lateer, helps us visualize the path
-                print(count)
-                print(visited)
-
                 # exception for dead pages
                 if not current_wiki.exists:
                     raise PathDeadend
@@ -114,7 +109,7 @@ class Greedy():
 
 
         while not wiki_page.exists(): 
-            # checking to see if there exists a lists
+            # checking to see if list exists
             if not sorted_links:
                 raise PathDeadend
             
@@ -125,23 +120,10 @@ class Greedy():
         return sorted_links[0]
 
 
-    
-
-# def main():
-#     findPath("Pomona College", "Pitzer College")
-
 if __name__ == "__main__":
-#     main()
     tester_1 = Greedy()
-    # print(tester_1.find_path("Pomona College", "Inland Empire"))
-    # print("done")
-
-    # wiki_access = wikipediaapi.Wikipedia('Aldo & Richard', 'en')
-    # wiki_start = wiki_access.page("Pomona College") 
-    # wiki_start = wiki_access.page("Moses Hahl")
-    # print(wiki_start.exists())
     print(tester_1.find_path("Pomona College", "Albert Einstein"))
 
-    # Issue with Pomona College to Albert Einstein - parse line 80
+
 
 
