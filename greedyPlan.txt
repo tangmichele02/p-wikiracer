@@ -1,0 +1,27 @@
+1) Find a way to access contents of wikipedia page 
+    - All the texts, thats what we use sentence transformers format
+    - Are we comparing based on titles or entire wikipedia content?
+    - Do we want to include the "hidden links" or not?
+    - Done- we get all the titles
+
+2) We use the cosine similarities to compare to compare how similar two links
+    - Currently, we already have a way to get all the links
+    - This is using Semantic Search I believe, and we input it as a parameter for one function
+    - Six links of hypthesis? maybe the max
+    - Done
+
+3) We are using weights of the cosine,
+    - Make sure it does not do a loop - revisit pages - we can do this with a hashset
+    - We also are looking for the shortest path to get from one place to another
+    - Adjust the cosine similarity valyes
+
+    How to make greedy algorithms (comes from... https://www.simplilearn.com/tutorials/data-structure-tutorial/greedy-algorithm)
+    - Apply Dijkstra. Consider the 1 - cosine
+    - Step 1: In a given problem, find the best substructure or subproblem.
+    - Step 2: Determine what the solution will include (e.g., largest sum, shortest path).
+    - Step 3: Create an iterative process for going over all subproblems and creating an optimum solution.
+
+4) To-do
+    - Change names for better names [DONE]
+    - update visited in getlinkedlists [DONE]
+        - would decrease the number of cos sim we'd have to run
