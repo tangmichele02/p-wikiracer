@@ -20,6 +20,7 @@ class Greedy():
         """
         self.max_path_length = 18 
         self.model = SentenceTransformer('paraphrase-MiniLM-L6-v2')
+        self.wiki_access = wikipediaapi.Wikipedia('Aldo & Richard', 'en')
 
 
 
@@ -39,9 +40,9 @@ class Greedy():
         a reason other than an api call failure.
         """
         # accessing wikipedia api 
-        wiki_access = wikipediaapi.Wikipedia('Aldo & Richard', 'en')
-        wiki_start = wiki_access.page(start_page) # wiki page for start 
-        wiki_dest = wiki_access.page(dest_page) # wiki page for dest
+        self.wiki_access = wikipediaapi.Wikipedia('Aldo & Richard', 'en')
+        wiki_start = self.wiki_access.page(start_page) # wiki page for start 
+        wiki_dest = self.wiki_access.page(dest_page) # wiki page for dest
 
         if (wiki_start.exists() and wiki_dest.exists()):
             visited = [start_page] # list of visisted pages
@@ -69,7 +70,7 @@ class Greedy():
                     return visited
                 
                 # updated current and count
-                current_wiki = wiki_access.page(most_sim_page)
+                current_wiki = self.wiki_access.page(most_sim_page)
                 count += 1
             
             raise MaxPathLengthExceeded(f"Path of length less than or equal to {self.max_path_length} could not be found.")
@@ -108,8 +109,8 @@ class Greedy():
         # sorting links by cosine similarity
         sorted_links = sorted(links,key = lambda title: util.cos_sim(self.model.encode(title), encoded_target)[0][0].item(), reverse=True)
         
-        # checking if page w/ highets cos sim exists
-        wiki_page = wiki_access.page(sorted_links[0])
+        # checking if page w/ highest cos sim exists
+        wiki_page = self.wiki_access.page(sorted_links[0])
 
 
         while not wiki_page.exists(): 
@@ -119,7 +120,7 @@ class Greedy():
             
             # pop out pages that don't exist
             sorted_links.pop(0)
-            wiki_page = wiki_access.page(sorted_links[0])
+            wiki_page = self.wiki_access.page(sorted_links[0])
             
         return sorted_links[0]
 
@@ -135,7 +136,7 @@ if __name__ == "__main__":
     # print(tester_1.find_path("Pomona College", "Inland Empire"))
     # print("done")
 
-    wiki_access = wikipediaapi.Wikipedia('Aldo & Richard', 'en')
+    # wiki_access = wikipediaapi.Wikipedia('Aldo & Richard', 'en')
     # wiki_start = wiki_access.page("Pomona College") 
     # wiki_start = wiki_access.page("Moses Hahl")
     # print(wiki_start.exists())
