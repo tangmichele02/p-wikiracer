@@ -15,7 +15,12 @@ def send():
 
 @app.route('/api')
 def api():
-    response = {'message': 'Hello, World!'}
+    
+    searchTerm = request.args.get("textInput")
+
+    print(searchTerm)
+
+    response = {'searchResult': "{}!!!".format(searchTerm)}
     return jsonify(response)
 
 if __name__ == '__main__':

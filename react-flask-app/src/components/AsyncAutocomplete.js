@@ -7,6 +7,7 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 // import parse from 'autosuggest-highlight/parse';
 import { debounce } from '@mui/material/utils';
+import axios from 'axios';
 
 // This key was created specifically for the demo in mui.com.
 // You need to create a new one for your application.
@@ -88,6 +89,15 @@ export default function AsyncAutocomplete(props) {
     // });
 
     console.log(inputValue)
+
+    axios.get("http://127.0.0.1:5000/api?textInput=" + inputValue)
+      .then(response => {
+        // Update the state with the data from the API response
+        // setInputValue(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });
 
     return () => {
       active = false;

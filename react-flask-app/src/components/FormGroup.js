@@ -5,11 +5,6 @@ import Autocomplete from '@mui/material/Autocomplete';
 import AsyncAutocomplete from './AsyncAutocomplete.js'
 
 
-function handleSelectName(){
-
-
-}
-
 
 function FormGroup() {
   var searchNames1 = ['Sydney', 'Melbourne', 'Brisbane', 
