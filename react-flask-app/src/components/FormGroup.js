@@ -1,5 +1,11 @@
 import { useState } from 'react';
 import './components.css'
+import React, { useState } from 'react';
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
+import AsyncAutocomplete from './AsyncAutocomplete.js'
+
+
 
 function handleClick(inputText, outputText) {
   const requestOptions = {
@@ -32,11 +38,47 @@ function handleClick(inputText, outputText) {
 // }
 
 function FormGroup() {
-  const [inputText, setInputText] = useState("");
-  const [outputText, setOutputText] = useState("");
+
+  var searchNames1 = ['Sydney', 'Melbourne', 'Brisbane', 
+  'Adelaide', 'Perth', 'Hobart'];
+
+  var searchNames2 = ['Apple', 'Pear', 'Banana', 
+    'Arbalest', 'Crossbow', 'Trebuchet'];
+
   return  (
-    <div>
-      <div class="form-group">
+    
+    <div class="form-group">
+
+      <AsyncAutocomplete title="Start Page"/>
+      <AsyncAutocomplete title="End Page"/>
+      {/* <Autocomplete
+        disablePortal
+        id="combo-box-demo1"
+        options={searchNames1}
+        sx={{ width: 300 }}
+        renderInput={(params) => <TextField {...params} label="Start" />}
+      /> */}
+
+    {/* <Autocomplete
+      disablePortal
+      id="combo-box-dem2"
+      options={searchNames2}
+      sx={{ width: 300 }}
+      renderInput={(params) => <TextField {...params} label="End" />}
+    /> */}
+    
+        {/* <div class="start-field">
+            <input type="text" name = "start"/>
+        </div>
+        <div class="end-field">
+            <input type="text" name = "end"/>
+        </div> */}
+
+  // const [inputText, setInputText] = useState("");
+  // const [outputText, setOutputText] = useState("");
+  //return  (
+    {/*<div>
+    <div class="form-group">
           <div class="start-field">
               <input type="text" name = "start" onChange={(e) => setInputText(e.target.value)}/>
           </div>
@@ -47,8 +89,10 @@ function FormGroup() {
       <div class = "submit-button">
         <input class="btn" type="submit" value="submit" onClick={() => handleClick(inputText, outputText)}/>
       </div>
-    </div>
-  );
+      
+
+    </div>*/}
+  //);
 }
 
 export default FormGroup;
