@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import './components.css'
 import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
@@ -37,6 +36,26 @@ function handleClick(inputText, outputText) {
 //   );
 // }
 
+// const [inputText, setInputText] = useState("");
+  // const [outputText, setOutputText] = useState("");
+  //return  (
+    {/*<div>
+    <div class="form-group">
+          <div class="start-field">
+              <input type="text" name = "start" onChange={(e) => setInputText(e.target.value)}/>
+          </div>
+          <div class="end-field">
+            <input type="text" name = "end" onChange={(e) => setOutputText(e.target.value)}/>
+          </div>
+      </div>
+      <div class = "submit-button">
+        <input class="btn" type="submit" value="submit" onClick={() => handleClick(inputText, outputText)}/>
+      </div>
+      
+
+    </div>*/}
+  //);
+
 function FormGroup() {
 
   var searchNames1 = ['Sydney', 'Melbourne', 'Brisbane', 
@@ -72,27 +91,9 @@ function FormGroup() {
         </div>
         <div class="end-field">
             <input type="text" name = "end"/>
-        </div> */}
-
-  // const [inputText, setInputText] = useState("");
-  // const [outputText, setOutputText] = useState("");
-  //return  (
-    {/*<div>
-    <div class="form-group">
-          <div class="start-field">
-              <input type="text" name = "start" onChange={(e) => setInputText(e.target.value)}/>
-          </div>
-          <div class="end-field">
-            <input type="text" name = "end" onChange={(e) => setOutputText(e.target.value)}/>
-          </div>
-      </div>
-      <div class = "submit-button">
-        <input class="btn" type="submit" value="submit" onClick={() => handleClick(inputText, outputText)}/>
-      </div>
-      
-
-    </div>*/}
-  //);
+  */}</div>
+  )
+  
 }
 
 export default FormGroup;

@@ -93,7 +93,8 @@ export default function AsyncAutocomplete(props) {
     axios.get("http://127.0.0.1:5000/api?textInput=" + inputValue)
       .then(response => {
         // Update the state with the data from the API response
-        // setInputValue(response.data);
+        console.log(response.data.searchResult)
+        // setOptions();
       })
       .catch(error => {
         console.error('Error fetching data:', error);
@@ -102,6 +103,8 @@ export default function AsyncAutocomplete(props) {
     return () => {
       active = false;
     };
+
+
 
   }, [value, inputValue, fetch]);
 
