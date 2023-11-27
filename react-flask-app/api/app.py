@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request, jsonify
 import time
 from flask_cors import CORS
+import wikipediaapi
+import wikipedia
 
 app = Flask(__name__)
 CORS(app)
@@ -20,14 +22,17 @@ def api():
 
     print(searchTerm)
 
-    # myResults = {searchTerm, searchTerm + 1, searchTerm + 2}
+    # myResults = [searchTerm, searchTerm + "1", searchTerm + "2"]
+    myResults = get_searches(searchTerm,5)
 
-    response = {'searchResult': "myResults"}
+    response = {'searchResult': myResults}
     return jsonify(response)
 
 
 def get_searches(text, count):
+    # wiki = wikipediaapi.Wikipedia('en')
     searches = wikipedia.search(text, results=count)
+    print(searches)
     return searches
 
 if __name__ == '__main__':

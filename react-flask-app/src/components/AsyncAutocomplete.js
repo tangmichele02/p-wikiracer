@@ -93,8 +93,15 @@ export default function AsyncAutocomplete(props) {
     axios.get("http://127.0.0.1:5000/api?textInput=" + inputValue)
       .then(response => {
         // Update the state with the data from the API response
-        console.log(response.data.searchResult)
-        // setOptions();
+        // let newOptions = [];
+        // newOptions = [...newOptions, ...response.data.searchResult];
+
+        // console.log(response.data.searchResult[1])
+        // response.data.searchResult.forEach(element => {
+        //   newOptions.push(element);
+        // });
+        // console.log(newOptions)
+        setOptions(response.data.searchResult)
       })
       .catch(error => {
         console.error('Error fetching data:', error);
@@ -134,7 +141,10 @@ export default function AsyncAutocomplete(props) {
       )}
       renderOption={(props, option) => {
         const matches =
-          option.structured_formatting.main_text_matched_substrings || [];
+          option;
+
+          //.structured_formatting.main_text_matched_substrings || []
+
 
         // const parts = parse(
         //   option.structured_formatting.main_text,
@@ -157,9 +167,10 @@ export default function AsyncAutocomplete(props) {
                     {part.text}
                   </Box>
                 ))} */}
-                <Typography variant="body2" color="text.secondary">
+                {/* <Typography variant="body2" color="text.secondary">
                   {option.structured_formatting.secondary_text}
-                </Typography>
+                </Typography> */}
+                <p>{option}</p>
               </Grid>
             </Grid>
           </li>
