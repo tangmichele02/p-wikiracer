@@ -1,26 +1,7 @@
+import AsyncAutocomplete from './AsyncAutocomplete';
 import './components.css'
 import AsyncAutocomplete from "./AsyncAutocomplete"
 import React, { useState } from 'react';
-
-// const [inputText, setInputText] = useState("");
-  // const [outputText, setOutputText] = useState("");
-  //return  (
-    {/*<div>
-    <div class="form-group">
-          <div class="start-field">
-              <input type="text" name = "start" onChange={(e) => setInputText(e.target.value)}/>
-          </div>
-          <div class="end-field">
-            <input type="text" name = "end" onChange={(e) => setOutputText(e.target.value)}/>
-          </div>
-      </div>
-      <div class = "submit-button">
-        <input class="btn" type="submit" value="submit" onClick={() => handleClick(inputText, outputText)}/>
-      </div>
-      
-
-    </div>*/}
-  //);
 
 function FormGroup() {
   const [inputText, setInputText] = useState("");
@@ -53,6 +34,8 @@ function FormGroup() {
 
   return  (
     <div>
+      
+
     <div class="form-group">
       <AsyncAutocomplete title="Start Page"/>
       <AsyncAutocomplete title="End Page"/>
