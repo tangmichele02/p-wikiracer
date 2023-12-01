@@ -41,11 +41,11 @@ export default function AsyncAutocomplete(props) {
         console.error('Error fetching data:', error);
       });
 
+    props.setValue(value);
+
     return () => {
       active = false;
     };
-
-
 
   }, [value, inputValue, fetch]);
 
