@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import FormGroup from './components/FormGroup';
 import Headers from './components/Headers';
+import Car from './components/Car';
 
 function App() {
   const [message, setMessage] = useState('');
@@ -23,6 +24,7 @@ function App() {
       <h1>Welcome to p-wikiracer!</h1>
       <Headers/>
       <FormGroup/>
+      <Car/>
     </div>
   );
 }
