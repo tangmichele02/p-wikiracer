@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 function FormGroup() {
   const [startVal, setStartVal] = useState("");
   const [endVal, setEndVal] = useState("");
-  const [pathstr, setpathstr] = useState("");
+  const [pathStr, setpathstr] = useState("");
   // let history = useHistory();
 
   function handleClick(inputText, outputText) {
@@ -31,30 +31,28 @@ function FormGroup() {
       });
 
       // history.push("/results");
-      
+      return (
+        <div>
+          {pathStr}
+        </div>
+      )
     }
 
   return  (
     <div>
-    
-    <div class="form-group">
-      {/* <AsyncAutocomplete title="Start Page" setValue={setStartVal}/>
-      <AsyncAutocomplete title="End Page" setValue={setEndVal}/> */}
-          <div class="start-field">
-              <input type="text" name = "start" onChange={(e) => setStartVal(e.target.value)}/>
-          </div>
-          <div class="end-field">
-            <input type="text" name = "end" onChange={(e) => setEndVal(e.target.value)}/>
-          </div>
-      </div>
-      <div class = "submit-button">
-        <input class="btn" type="submit" value="submit" onClick={() => handleClick(startVal, endVal)}/>
-        <div>
-          {startVal}
-          {endVal}
-          {pathstr}
+      <div class="form-group">
+        {/* <AsyncAutocomplete title="Start Page" setValue={setStartVal}/>
+        <AsyncAutocomplete title="End Page" setValue={setEndVal}/> */}
+            <div class="start-field">
+                <input type="text" name = "start" onChange={(e) => setStartVal(e.target.value)}/>
+            </div>
+            <div class="end-field">
+              <input type="text" name = "end" onChange={(e) => setEndVal(e.target.value)}/>
+            </div>
         </div>
-      </div>
+        <div class = "submit-button">
+          <input class="btn" type="submit" value="submit" onClick={() => handleClick(startVal, endVal)}/>
+        </div>
     </div>
   );
 

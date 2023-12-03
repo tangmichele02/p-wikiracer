@@ -1,6 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Didact+Gothic&family=Press+Start+2P&display=swap');
+
 body {
 	font-family: "IBM Plex Sans", sans-serif;
-	background-color: C3DBF5;
+	background-color: #C3DBF5;
     margin: 0;
 }
 
@@ -216,3 +218,8 @@ img {
 		transform: translateX(125vw);
 	}
   }
+
+.path-result {
+	font-family: "Press Start 2P";
+	text-align: center;
+}

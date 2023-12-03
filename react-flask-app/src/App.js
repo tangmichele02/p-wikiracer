@@ -3,6 +3,8 @@ import FormGroup from './components/FormGroup';
 import Headers from './components/Headers';
 import Car from './components/Car';
 
+document.body.style = 'background: #C3DBF5;';
+
 function App() {
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
@@ -21,11 +23,14 @@ function App() {
 
   return (
     <div>
-      <h1>Welcome to p-wikiracer!</h1>
-      <Headers/>
-      <FormGroup/>
-      <Car/>
+      <div>
+        <h1>Welcome to p-wikiracer!</h1>
+        <Headers/>
+        <FormGroup/>
+        <Car/>
+      </div>
     </div>
+    
   );
 }
 
