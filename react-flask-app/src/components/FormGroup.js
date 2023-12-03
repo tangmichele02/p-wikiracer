@@ -1,13 +1,13 @@
 // import AsyncAutocomplete from './AsyncAutocomplete';
 import './components.css'
 import React, { useState } from 'react';
-import { useHistory } from "react-router-dom"
+// import { useHistory } from "react-router-dom"
 
 function FormGroup() {
   const [startVal, setStartVal] = useState("");
   const [endVal, setEndVal] = useState("");
   const [pathstr, setpathstr] = useState("");
-  let history = useHistory();
+  // let history = useHistory();
 
   function handleClick(inputText, outputText) {
     const requestOptions = {
@@ -30,7 +30,7 @@ function FormGroup() {
         console.log(response_value);
       });
 
-      history.push("/results");
+      // history.push("/results");
       
     }
 
