@@ -15,10 +15,8 @@ class Greedy():
             some measure of their similarity.
         """
         self.max_path_length = 18 
-        self.model = SentenceTransformer('average_word_embeddings_-glove.6B.300d')
+        self.model = SentenceTransformer('average_word_embeddings_glove.6B.300d')
         self.wiki_access = wikipediaapi.Wikipedia('Aldo & Richard', 'en')
-
-
 
     def set_max_path(self, max_path_length):
         """

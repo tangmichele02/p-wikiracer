@@ -10,6 +10,9 @@ function FormGroup() {
 
 
   function handleClick(startVal, endVal) {
+
+    setpathstr("Finding the shortest path...")
+
     axios.get("http://127.0.0.1:5000/api/alg?startValue=" + startVal + "&endValue=" + endVal)
       .then(response => {
         setpathstr(response.data.path)
@@ -40,7 +43,7 @@ function FormGroup() {
               <div class="rectangle">End</div>
           </div>
           <div class="start-field">
-            <AsyncAutocomplete title="" setValue={setStartVal}/>
+            <AsyncAutocomplete title="" setValue={setEndVal}/>
           </div>
         </div>
       </div>
