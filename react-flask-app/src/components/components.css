@@ -1,0 +1,270 @@
+@import url('https://fonts.googleapis.com/css2?family=Didact+Gothic&family=Press+Start+2P&display=swap');
+
+body {
+	font-family: "IBM Plex Sans", sans-serif;
+	background-color: #C3DBF5;
+    margin: 0;
+}
+
+h1 {
+	font-family: "Press Start 2P";
+	color: #726145;
+	text-align: center;
+	margin-top: 75px;
+	margin-bottom: 0px;
+}
+
+h2 {
+	font-family: "Press Start 2P";
+	color: #726145;
+	text-align: center;
+	margin-top: 0px;
+}
+
+
+.headers {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+.header-field-group {
+	display: grid;
+	align-items: center;
+	justify-content: center;
+	vertical-align: middle;
+	margin-top: 0px;
+}
+
+.start-header {
+	grid-column: 1;
+	grid-row: 1;
+	margin-left:auto;
+	margin-right: auto;
+}
+
+.end-header {
+	margin-left: auto;
+}
+
+.start-field {
+    margin-left:100px;
+    margin-right:auto;
+}
+
+.end-field {
+	margin-left:auto;
+    margin-right:auto;
+}
+
+.rectangle {
+	background-color: #F2D5D5; /* Green */
+	border: solid;
+	border-width: thin;
+	border-radius: 10px;
+	color: #726145;
+	padding: 10px 20px;
+	width: 100px;
+	text-align: center;
+	text-decoration: none;
+	font-size: 14px;
+	font-family:'Press Start 2P';
+	position: relative;
+	margin-bottom: 50px;
+	margin-top: 50px;
+}
+
+.form-group {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+input {
+	padding: 10px 32px;
+	font-size: 14px;
+	font-family:'Press Start 2P';
+	text-align: center;
+}
+
+.start-field {
+	margin-right: 100px;
+}
+
+.submit-button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 50px;
+	height: 70%;
+}
+
+.btn {
+	background-color: #F2D5D5; /* Green */
+	border: solid;
+	border-width: thin;
+	border-radius: 10px;
+	color: #726145;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	position: relative;
+	font-family:'Press Start 2P';
+}
+/* 
+.dot {
+	height: 1px;
+	width: 1px;
+	background-color: C3DBF5;
+	border-radius: 50%;
+	display: inline-block;
+	transform: translateX(-100%);
+	animation-name: chug;
+	animation-duration: 4s;
+	animation-iteration-count: infinite;
+}
+
+@keyframes chug {
+	0% {
+		transform: translateX(-100%);
+	}
+	33% {
+		transform: translateX(50vw);
+	}
+	66% {
+		transform: translateX(50vw);
+	}
+	100% {
+		transform: translateX(100vw);
+	}
+} */
+
+.grid-container {
+	display: flex;
+	flex-direction: row;
+	align-items: flex-start;
+	gap: 1px;
+	height: 600px;
+}
+
+.result-container {
+	flex: 1;
+	border: 3px solid black;
+	margin-left: 50px;
+	width: 50%;
+	display: block;
+}
+
+.form-container {
+	text-align: center;
+	margin-top: 0px;
+}
+
+.form-group {
+	display: inline-block;
+	vertical-align: middle;
+	margin-top: 0px;
+}
+
+.result-list {
+	display: block;
+	margin: 0 auto;
+}
+
+.embed-web { 
+	width: 85%;
+	height: 100%;
+	display: block;
+}
+
+iframe {
+	width: 85%;
+	height: 100%;
+	display: block;
+	margin-left: 50px;
+	margin-bottom: 30px;
+}
+
+img {
+	max-width: 40%;
+	height: auto;
+}
+
+.red {
+    border-radius: 50%;
+    display: inline-block;
+    bottom: 9vw;
+    animation-delay: -5s;
+    transform: translateX(-100%);
+    animation-name: moveAcross;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
+}
+
+.blue {
+    border-radius: 50%;
+    display: inline-block;
+    bottom: 5vw;
+    animation-delay: -10s;
+    transform: translateX(-100%);
+    animation-name: moveAcross;
+    animation-duration: 11s;
+    animation-iteration-count: infinite;
+}
+
+.green {
+    border-radius: 50%;
+    display: inline-block;
+    bottom: 1vw;
+    animation-delay: -4s;
+    transform: translateX(-100%);
+    animation-name: moveAcross;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
+}
+
+.rcar {
+    position: absolute;
+    left: 15%;
+}
+
+.bcar {
+    position: absolute;
+    left: -3.5%;
+}
+
+.gcar {
+    position: absolute;
+    left: -21%;
+}
+
+@keyframes moveAcross {
+	0% {
+	  transform: translateX(-50vw);
+	}
+	60% {
+		transform: translateX(50vw);
+	}
+	40% {
+		transform: translateX(50vw);
+	}
+	100% {
+		transform: translateX(125vw);
+	}
+  }
+
+.result-path {
+	font-family: "Press Start 2P";
+	text-align: center;
+	font-size: 12px;
+	color: #726145;
+	margin-bottom: 10px;
+	margin-top: 0px;
+}
+
+.cars {
+	margin-top: 50px;
+}
