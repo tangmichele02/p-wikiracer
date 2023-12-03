@@ -2,4 +2,5 @@ flask
 requests
 pytest
 sentence_transformers
-wikipediaapi
+wikipedia-api
+wikipedia
