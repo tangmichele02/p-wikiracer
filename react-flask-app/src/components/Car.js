@@ -5,7 +5,7 @@ import greencar from './greencar.png'
 
 function Car() {
   return  (
-    <div>
+    <div class="cars">
         <div class="red rcar">
             <img src={redcar} />
         </div>

@@ -11,25 +11,51 @@ h1 {
 	color: #726145;
 	text-align: center;
 	margin-top: 75px;
-	margin-bottom: 50px;
+	margin-bottom: 0px;
 }
 
 h2 {
 	font-family: "Press Start 2P";
 	color: #726145;
 	text-align: center;
-	margin-top: 25px;
-	margin-bottom: 50px;
+	margin-top: 0px;
 }
+
 
 .headers {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+.header-field-group {
+	display: grid;
+	align-items: center;
+	justify-content: center;
+	vertical-align: middle;
+	margin-top: 0px;
 }
 
 .start-header {
-	margin-right: 300px;
+	grid-column: 1;
+	grid-row: 1;
+	margin-left:auto;
+	margin-right: auto;
+}
+
+.end-header {
+	margin-left: auto;
+}
+
+.start-field {
+    margin-left:100px;
+    margin-right:auto;
+}
+
+.end-field {
+	margin-left:auto;
+    margin-right:auto;
 }
 
 .rectangle {
@@ -71,7 +97,7 @@ input {
 	align-items: center;
 	justify-content: center;
 	padding: 50px;
-	margin-top: 20px;
+	height: 70%;
 }
 
 .btn {
@@ -132,6 +158,17 @@ input {
 	display: block;
 }
 
+.form-container {
+	text-align: center;
+	margin-top: 0px;
+}
+
+.form-group {
+	display: inline-block;
+	vertical-align: middle;
+	margin-top: 0px;
+}
+
 .result-list {
 	display: block;
 	margin: 0 auto;
@@ -152,14 +189,14 @@ iframe {
 }
 
 img {
-	max-width: 70%;
+	max-width: 40%;
 	height: auto;
 }
 
 .red {
     border-radius: 50%;
     display: inline-block;
-    bottom: 160px;
+    bottom: 9vw;
     animation-delay: -5s;
     transform: translateX(-100%);
     animation-name: moveAcross;
@@ -170,7 +207,7 @@ img {
 .blue {
     border-radius: 50%;
     display: inline-block;
-    bottom: 100px;
+    bottom: 5vw;
     animation-delay: -10s;
     transform: translateX(-100%);
     animation-name: moveAcross;
@@ -181,7 +218,7 @@ img {
 .green {
     border-radius: 50%;
     display: inline-block;
-    bottom: 40px;
+    bottom: 1vw;
     animation-delay: -4s;
     transform: translateX(-100%);
     animation-name: moveAcross;
@@ -219,7 +256,15 @@ img {
 	}
   }
 
-.path-result {
+.result-path {
 	font-family: "Press Start 2P";
 	text-align: center;
+	font-size: 12px;
+	color: #726145;
+	margin-bottom: 10px;
+	margin-top: 0px;
+}
+
+.cars {
+	margin-top: 50px;
 }

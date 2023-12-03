@@ -25,7 +25,7 @@ function App() {
     <div>
       <div>
         <h1>Welcome to p-wikiracer!</h1>
-        <Headers/>
+        {/* <Headers/> */}
         <FormGroup/>
         <Car/>
       </div>

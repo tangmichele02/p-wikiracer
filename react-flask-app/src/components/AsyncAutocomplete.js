@@ -3,7 +3,11 @@ import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import Grid from '@mui/material/Grid';
 import axios from 'axios';
+import './components.css'
 
+const customStyle = {
+  fontFamily:'Monospace',
+}
 
 function loadScript(src, position, id) {
   if (!position) {
@@ -52,6 +56,7 @@ export default function AsyncAutocomplete(props) {
   return (
     <Autocomplete
       id="async-autocomplete-1"
+      style={customStyle}
       sx={{ width: 300 }}
       getOptionLabel={(option) =>
         typeof option === 'string' ? option : option.description
@@ -80,7 +85,7 @@ export default function AsyncAutocomplete(props) {
           <li {...props}>
             <Grid container alignItems="center">
               <Grid item sx={{ width: 'calc(100% - 44px)', wordWrap: 'break-word' }}>
-                <li>{option}</li>
+                <div style = {{fontFamily: "Press Start 2P"}}>{option}</div>
               </Grid>
             </Grid>
           </li>

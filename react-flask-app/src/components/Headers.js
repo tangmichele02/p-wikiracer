@@ -10,6 +10,8 @@ function Headers() {
             <div class="rectangle">Output</div>
         </div>   
     </div>
+
+    
   );
 
 }
