@@ -4,3 +4,4 @@ pytest
 sentence_transformers
 wikipedia-api
 wikipedia
+gunicorn
